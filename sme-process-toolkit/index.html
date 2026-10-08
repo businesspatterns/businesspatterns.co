@@ -1,425 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>SME Process Improvement Toolkit for Excel | BUSINESS PATTERNS</title>
-
-  <meta name="description" content="A practical Excel toolkit for small and growing businesses to assess processes, prioritise improvements, identify bottlenecks and automation opportunities, and estimate time and cost savings.">
-
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      color: #172033;
-      background: #ffffff;
-      line-height: 1.6;
-    }
-
-    a {
-      text-decoration: none;
-    }
-
-    .container {
-      width: min(1120px, 90%);
-      margin: 0 auto;
-    }
-
-    /* HEADER */
-
-    header {
-      background: #ffffff;
-      border-bottom: 1px solid #e6e9ed;
-    }
-
-    .header-inner {
-      min-height: 78px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      color: #0c3559;
-      font-weight: 700;
-      letter-spacing: .3px;
-    }
-
-    .brand img {
-      width: 48px;
-      height: auto;
-    }
-
-    .back-link {
-      color: #0c3559;
-      font-size: 14px;
-      font-weight: 600;
-    }
-
-    /* HERO */
-
-    .hero {
-      background: linear-gradient(135deg, #f4f8fb 0%, #ffffff 65%);
-      padding: 75px 0;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.15fr .85fr;
-      gap: 60px;
-      align-items: center;
-    }
-
-    .eyebrow {
-      color: #16834b;
-      font-weight: 700;
-      font-size: 14px;
-      letter-spacing: .8px;
-      text-transform: uppercase;
-      margin-bottom: 14px;
-    }
-
-    h1 {
-      color: #0c3559;
-      font-size: clamp(38px, 5vw, 60px);
-      line-height: 1.08;
-      margin-bottom: 22px;
-    }
-
-    .hero-text {
-      font-size: 20px;
-      color: #455266;
-      max-width: 680px;
-      margin-bottom: 28px;
-    }
-
-    .price {
-      font-size: 31px;
-      font-weight: 700;
-      color: #0c3559;
-      margin-bottom: 6px;
-    }
-
-    .price-note {
-      color: #687385;
-      font-size: 14px;
-      margin-bottom: 25px;
-    }
-
-    .button {
-      display: inline-block;
-      background: #16834b;
-      color: #ffffff;
-      padding: 15px 26px;
-      border-radius: 7px;
-      font-weight: 700;
-      transition: .2s ease;
-    }
-
-    .button:hover {
-      opacity: .9;
-      transform: translateY(-1px);
-    }
-
-    .hero-card {
-      background: #0c3559;
-      color: #ffffff;
-      padding: 38px;
-      border-radius: 16px;
-      box-shadow: 0 18px 45px rgba(12, 53, 89, .15);
-    }
-
-    .hero-card h2 {
-      font-size: 25px;
-      margin-bottom: 22px;
-    }
-
-    .hero-card ul {
-      list-style: none;
-    }
-
-    .hero-card li {
-      padding: 11px 0;
-      border-bottom: 1px solid rgba(255,255,255,.15);
-    }
-
-    .hero-card li:last-child {
-      border-bottom: 0;
-    }
-
-    .hero-card li::before {
-      content: "✓";
-      color: #70d59c;
-      font-weight: 700;
-      margin-right: 10px;
-    }
-
-    /* SECTIONS */
-
-    section {
-      padding: 75px 0;
-    }
-
-    .section-light {
-      background: #f6f8fa;
-    }
-
-    .section-heading {
-      max-width: 760px;
-      margin-bottom: 42px;
-    }
-
-    .section-heading h2 {
-      color: #0c3559;
-      font-size: 36px;
-      line-height: 1.2;
-      margin-bottom: 14px;
-    }
-
-    .section-heading p {
-      color: #586477;
-      font-size: 18px;
-    }
-
-    /* BENEFITS */
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
-    }
-
-    .card {
-      border: 1px solid #e3e7eb;
-      border-radius: 12px;
-      padding: 28px;
-      background: #ffffff;
-    }
-
-    .card-number {
-      display: inline-flex;
-      width: 38px;
-      height: 38px;
-      align-items: center;
-      justify-content: center;
-      background: #eaf5ef;
-      color: #16834b;
-      border-radius: 50%;
-      font-weight: 700;
-      margin-bottom: 18px;
-    }
-
-    .card h3 {
-      color: #0c3559;
-      margin-bottom: 9px;
-      font-size: 19px;
-    }
-
-    .card p {
-      color: #5c6778;
-      font-size: 15px;
-    }
-
-    /* TOOLKIT */
-
-    .toolkit-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 50px;
-      align-items: start;
-    }
-
-    .check-list {
-      list-style: none;
-    }
-
-    .check-list li {
-      margin-bottom: 17px;
-      padding-left: 31px;
-      position: relative;
-    }
-
-    .check-list li::before {
-      content: "✓";
-      position: absolute;
-      left: 0;
-      color: #16834b;
-      font-weight: 700;
-    }
-
-    .excel-box {
-      background: #eef7f2;
-      border-left: 5px solid #16834b;
-      padding: 28px;
-      border-radius: 8px;
-    }
-
-    .excel-box h3 {
-      color: #0c3559;
-      margin-bottom: 12px;
-    }
-
-    /* PARTNERS */
-
-    .partner-box {
-      border: 1px solid #dce4e9;
-      border-radius: 14px;
-      padding: 38px;
-      background: #ffffff;
-      max-width: 900px;
-    }
-
-    .partner-box h2 {
-      color: #0c3559;
-      margin-bottom: 14px;
-      font-size: 30px;
-    }
-
-    .partner-box p {
-      color: #566274;
-      margin-bottom: 13px;
-    }
-
-    /* CTA */
-
-    .final-cta {
-      background: #0c3559;
-      color: #ffffff;
-      text-align: center;
-    }
-
-    .final-cta h2 {
-      font-size: 37px;
-      margin-bottom: 13px;
-    }
-
-    .final-cta p {
-      color: #d9e4ec;
-      max-width: 680px;
-      margin: 0 auto 27px;
-      font-size: 18px;
-    }
-
-    .final-cta .button {
-      background: #20a15e;
-    }
-
-    /* FOOTER */
-
-    footer {
-      background: #081f34;
-      color: #bdc8d2;
-      padding: 30px 0;
-      text-align: center;
-      font-size: 14px;
-    }
-
-    /* MOBILE */
-
-    @media (max-width: 800px) {
-
-      .header-inner {
-        min-height: 68px;
-      }
-
-      .brand img {
-        width: 40px;
-      }
-
-      .hero {
-        padding: 52px 0;
-      }
-
-      .hero-grid,
-      .toolkit-grid {
-        grid-template-columns: 1fr;
-        gap: 35px;
-      }
-
-      .cards {
-        grid-template-columns: 1fr;
-      }
-
-      section {
-        padding: 55px 0;
-      }
-
-      .section-heading h2 {
-        font-size: 30px;
-      }
-
-      .hero-card,
-      .partner-box {
-        padding: 27px;
-      }
-
-      .button {
-        display: block;
-        width: 100%;
-        text-align: center;
-      }
-
-      .final-cta h2 {
-        font-size: 31px;
-      }
-    }
-
-    @media (max-width: 480px) {
-
-      .container {
-        width: 91%;
-      }
-
-      .back-link {
-        font-size: 12px;
-      }
-
-      .brand span {
-        font-size: 14px;
-      }
-
-      .hero-text {
-        font-size: 18px;
-      }
-    }
-  </style>
-</head>
-
-<body>
-
-<header>
-  <div class="container header-inner">
-    <a class="brand" href="/">
-      <img src="../Business%20patterns%20Logo.png" alt="BUSINESS PATTERNS logo">
-      <span>BUSINESS PATTERNS</span>
-    </a>
-
-    <a class="back-link" href="/">← Main website</a>
-  </div>
-</header>
-
-
-<main>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SME Process Improvement Toolkit for Excel | BUSINESS PATTERNS</title><meta name="description" content="A 13-tab Excel workbook to assess processes, prioritise improvements and track results. US$19."><link rel="canonical" href="https://businesspatterns.co/products/sme-process-toolkit/"><link rel="stylesheet" href="/assets/css/style.css"><link rel="stylesheet" href="/assets/css/products.css"></head><body class="product-page"><a class="skip-link" href="#main">Skip to content</a><header class="site-header"><div class="container nav">
+<a class="brand" href="/"><img src="/assets/images/business-patterns-logo.webp" alt="BUSINESS PATTERNS logo"><span>BUSINESS PATTERNS</span></a>
+<nav class="links" aria-label="Main navigation">
+<a href="/services.html">Services</a><a href="/digital-front-office.html">Digital Front Office</a><a href="/products/" aria-current="page">Products</a><a href="/about.html">About</a><a href="/contact.html">Contact</a>
+</nav></div></header><main id="main" tabindex="-1">
 
   <section class="hero">
     <div class="container hero-grid">
 
       <div>
-        <div class="eyebrow">Practical SME Improvement Tool</div>
+        <p class="breadcrumb"><a href="/products/">Digital Products</a> / SME Process Improvement Toolkit</p><div class="eyebrow">For SME owners, managers and practitioners</div>
 
         <h1>SME Process Improvement Toolkit for Excel</h1>
 
@@ -435,7 +24,7 @@
           One-time purchase · No subscription · Microsoft Excel
         </div>
 
-        <a class="button"
+        <a class="btn primary"
            href="https://businesspatterns.lemonsqueezy.com/checkout/buy/33fde5ec-4a72-449d-a6c7-be7173d6d92f"
            target="_blank"
            rel="noopener">
@@ -461,7 +50,7 @@
   </section>
 
 
-  <section>
+  <section class="section">
     <div class="container">
 
       <div class="section-heading">
@@ -475,7 +64,7 @@
         </p>
       </div>
 
-      <div class="cards">
+      <div class="grid3">
 
         <div class="card">
           <div class="card-number">1</div>
@@ -536,8 +125,8 @@
   </section>
 
 
-  <section class="section-light">
-    <div class="container toolkit-grid">
+  <section class="section soft">
+    <div class="container grid2">
 
       <div>
         <div class="section-heading">
@@ -574,7 +163,7 @@
   </section>
 
 
-  <section>
+  <section class="section">
     <div class="container">
 
       <div class="partner-box">
@@ -598,7 +187,7 @@
   </section>
 
 
-  <section class="final-cta">
+  <section class="section final-cta">
     <div class="container">
 
       <h2>Start improving one process at a time.</h2>
@@ -609,7 +198,7 @@
         processes.
       </p>
 
-      <a class="button"
+      <a class="btn primary"
          href="https://businesspatterns.lemonsqueezy.com/checkout/buy/33fde5ec-4a72-449d-a6c7-be7173d6d92f"
          target="_blank"
          rel="noopener">
@@ -619,14 +208,8 @@
     </div>
   </section>
 
-</main>
-
-
-<footer>
-  <div class="container">
-    © 2026 BUSINESS PATTERNS · Practical tools. Real progress.
-  </div>
-</footer>
-
-</body>
-</html>
+<section class="section"><div class="container"><h2>Before you buy</h2><p>Format: 13-tab Excel workbook. Microsoft Excel is required; compatibility with other spreadsheet applications has not been verified. Savings estimates depend on your inputs and are not guaranteed results.</p><p><a href="/digital-product-terms.html">Read the digital product terms</a> · <a href="/contact.html">Ask a product question</a> · <a href="/products/">Browse all products</a></p></div></section></main><footer class="footer"><div class="container footer-grid">
+<div><strong>BUSINESS PATTERNS</strong><p>Practical support for better processes, stronger digital operations and appropriate automation.</p></div>
+<div><strong>Explore</strong><p><a href="/services.html">Services</a><br><a href="/products/">Digital Products</a><br><a href="/about.html">About</a></p></div>
+<div><strong>Information</strong><p><a href="/privacy.html">Privacy</a><br><a href="/terms.html">Terms</a><br><a href="/digital-product-terms.html">Digital Product Terms</a></p></div>
+</div><div class="container"><p class="small">© 2026 BUSINESS PATTERNS. All rights reserved.</p></div></footer></body></html>
